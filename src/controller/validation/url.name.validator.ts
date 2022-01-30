@@ -8,3 +8,4 @@ export const urlValidation = Joi.object().keys({
   Key: Joi.string().min(2),
   Bucket: Joi.string().min(2),
 });
+

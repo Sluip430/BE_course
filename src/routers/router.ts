@@ -1,12 +1,14 @@
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import multer from 'multer';
 import { uploadFile, getFileStream } from '../services/s3';
-import { setImageController, getKeyByIdController } from '../controller/setImageController';
+import { setImageController, getKeyByIdController, setImageLocalController } from '../controller/setImageController';
+import { Adapter } from '../Adapter/adapter';
+import { Local, S3 } from '../Class/Class';
 
 export const router = express.Router();
-const upload = multer();
+const upload = multer({ dest: 'uploads/' });
 
-router.post('/setMovie', upload.single('file'), async (req: any, res: any) => {
+router.post('/setImageS3', upload.single('file'), async (req: Request, res: Response) => {
   console.log(req.file);
   const { result, error } = await uploadFile(req.file);
 
@@ -19,14 +21,45 @@ router.post('/setMovie', upload.single('file'), async (req: any, res: any) => {
   res.status(value.status).send(value.data);
 });
 
-router.get('/getMovie/:id', async (req: any, res: any) => {
+router.post('/setImageLocal', upload.single('file'), async (req: Request, res: Response) => {
+  console.log(req.file);
+  const { result, error } = await setImageLocalController(req.file, req.body.name);
+
+  if (error) {
+    res.status(error.status).send(error.data);
+  }
+
+  res.status(result.status).send(result.data);
+});
+
+router.get('/getImage/:id', async (req: any, res: any) => {
   const id = req.params;
   const { error: controlError, value } = await getKeyByIdController(id);
+  let saveType;
+  console.log(value.data);
+  switch (value.data.save_type) {
+    case 'local': {
+      saveType = new Local(value.data.key);
 
-  const readStream = getFileStream(value.data);
+      break;
+    }
 
+    case 's3': {
+      saveType = new S3(value.data);
+
+      break;
+    }
+
+    default: {
+      res.send('Error');
+    }
+  }
+
+  const getFileClass = new Adapter(saveType);
+
+  const test = getFileClass.getTargetFile();
   res.status(200);
-  readStream.pipe(res);
+  test.pipe(res);
 });
 
 module.exports = { router };

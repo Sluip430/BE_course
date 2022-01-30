@@ -11,7 +11,7 @@ sendGrid.setApiKey(API_KEY);
 
 export const sendMessage = async (url: string) => {
   await sendGrid.send({
-    to: 'olegcigulev@gmail.com',
+    to: 's12122000@gmail.com',
     from: 'miha1488plet@gmail.com',
     subject: 'Testing sandGrid',
     text: 'Viatcheslav sand this mail!',
