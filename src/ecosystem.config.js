@@ -11,9 +11,11 @@ module.exports = {
       user: 'sluip',
       host: '34.118.50.162',
       ref: 'origin/pre_deploy',
-      repo: 'https://github.com/Sluip430/BE_course.git',
+      repo: 'https://github.com/Sluip430/BE_course/src',
       path: '/home/sluip/FirstDeploy',
       ssh_options: ['StrictHostKeyChecking=no', 'PasswordAuthentication=no'],
+      'pre-setup': 'rm -rf /home/sluip/FirstDeploy',
+      'post-deploy': 'npm install',
     },
   },
 };
