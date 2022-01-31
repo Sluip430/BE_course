@@ -18,7 +18,7 @@ module.exports = {
         NODE_ENV: 'pre_deploy',
       },
       'pre-setup': 'rm -fr /home/sluip/FirstDeploy',
-      'post-deploy': 'npm install && pm2 start ts-node -- -P tsconfig.json index.ts',
+      'post-deploy': 'npm install',
     },
   },
 };
