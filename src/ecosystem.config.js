@@ -14,9 +14,6 @@ module.exports = {
       repo: 'https://github.com/Sluip430/BE_course.git',
       path: '/home/sluip/FirstDeploy',
       ssh_options: ['StrictHostKeyChecking=no', 'PasswordAuthentication=no'],
-      env: {
-        NODE_ENV: 'pre_deploy',
-      },
       'pre-setup': 'rm -fr /home/sluip/FirstDeploy',
       'post-deploy': 'npm install',
     },
