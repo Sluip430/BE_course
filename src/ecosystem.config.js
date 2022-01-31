@@ -15,7 +15,6 @@ module.exports = {
       path: '/home/sluip/FirstDeploy',
       ssh_options: ['StrictHostKeyChecking=no', 'PasswordAuthentication=no'],
       'pre-setup': 'rm -fr /home/sluip/FirstDeploy',
-      'post-deploy': 'npm install',
     },
   },
 };
