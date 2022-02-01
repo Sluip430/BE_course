@@ -36,9 +36,13 @@ export const setImageLocalController = async (data: any, name: string) => {
 export const getKeyByIdController = async (id: string) => {
   const { value, error } = idValidation.validate(id, { abortEarly: false });
 
-  if (error) return { error };
+  if (error) return { error: { status: 400, data: error } };
 
   const { error: dbError, result } = await getKeyById(value);
+
+  if (!result) {
+    return { error: { status: 500, data: 'Cant find Image with this ID' } };
+  }
 
   if (dbError) return { error: { status: 500, data: dbError } };
 

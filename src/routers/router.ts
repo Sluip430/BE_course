@@ -36,7 +36,12 @@ router.post('/setImageLocal', upload.single('file'), async (req: Request, res: R
 
 router.get('/getImage/:id', async (req: any, res: any) => {
   const id = req.params;
-  const { error: controlError, value } = await getKeyByIdController(id);
+  const { error, value } = await getKeyByIdController(id);
+
+  if (error) {
+    return res.status(error.status).send(error.data);
+  }
+
   let saveType;
 
   switch (value.data.save_type) {
