@@ -1,8 +1,7 @@
 module.exports = {
   apps: [{
     name: 'server',
-    script: 'start ts-node -- -P tsconfig.json index.ts',
-    watch: '.',
+    script: 'index.ts',
   },
   ],
 
@@ -16,7 +15,7 @@ module.exports = {
       path: '/home/sluip/FirstDeploy',
       ssh_options: ['StrictHostKeyChecking=no', 'PasswordAuthentication=no'],
       'pre-setup': 'rm -rf /home/sluip/FirstDeploy',
-      'post-deploy': 'npm install',
+      'post-deploy': 'npm install && pm2 startOrRestart ecosystem.config.js',
     },
   },
 };
