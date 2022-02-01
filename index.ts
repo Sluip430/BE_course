@@ -1,8 +1,8 @@
 import express from 'express';
-import config from './configurations/config';
-import { router } from './routers/router';
+import config from './src/configurations/config';
+import { router } from './src/routers/router';
 
-require('./database/database');
+require('./src/database/database');
 
 const app = express();
 
