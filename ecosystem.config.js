@@ -15,7 +15,7 @@ module.exports = {
       path: '/home/sluip/FirstDeploy',
       ssh_options: ['StrictHostKeyChecking=no', 'PasswordAuthentication=no'],
       'pre-setup': 'rm -rf /home/sluip/FirstDeploy',
-      'post-deploy': 'npm install && pwd &&pm2 startOrRestart ts-node -- -P tsconfig.json index.ts',
+      'post-deploy': 'npm install && pwd &&pm2 startOrRestart node_modules/ts-node -- -P tsconfig.json index.ts',
     },
   },
 };
