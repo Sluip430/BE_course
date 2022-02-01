@@ -15,7 +15,7 @@ module.exports = {
       path: '/home/sluip/FirstDeploy',
       ssh_options: ['StrictHostKeyChecking=no', 'PasswordAuthentication=no'],
       'pre-setup': 'rm -rf /home/sluip/FirstDeploy',
-      'post-deploy': 'npm install && pm2 startOrRestart ecosystem.config.js',
+      'post-deploy': 'npm install && pwd && pm2 startOrRestart ecosystem.config.js',
     },
   },
 };
