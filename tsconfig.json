@@ -12,7 +12,8 @@
     "incremental": true,
     "esModuleInterop":true,
     "jsx": "react",
-    "allowJs": true
+    "allowJs": true,
+    "resolveJsonModule": true
   },
   "exclude": [
     "src/node_modules"
